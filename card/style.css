@@ -1,0 +1,324 @@
+ /* ---- Layout da página ---- */
+    .card-page {
+      min-height: 100svh;
+      background: var(--cinza-claro);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .card-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--text-sm);
+      color: var(--marrom-medio);
+      margin-bottom: var(--space-xl);
+      transition: color var(--transition-fast);
+      align-self: flex-start;
+    }
+
+    .card-back:hover {
+      color: var(--marrom);
+    }
+
+    .card-back svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ---- Card principal ---- */
+    .vcard {
+      width: 100%;
+      max-width: 420px;
+      background: var(--branco);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* Cabeçalho com foto */
+    .vcard__header {
+      background: var(--marrom);
+      position: relative;
+      padding: var(--space-2xl) var(--space-xl) 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .vcard__header::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(226, 201, 154, .08);
+    }
+
+    .vcard__header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(226, 201, 154, .06);
+    }
+
+    .vcard__photo-ring {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid rgba(226, 201, 154, .4);
+      padding: 3px;
+      margin: 0 auto var(--space-md);
+      position: relative;
+      z-index: 1;
+    }
+
+    .vcard__photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--marrom-medio);
+      object-fit: cover;
+      object-position: 20% 40%;
+    }
+
+    .vcard__photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, .3);
+    }
+
+    .vcard__photo-placeholder svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .vcard__name {
+      font-family: var(--font-titulo);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      color: var(--branco);
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .vcard__name em {
+      font-style: italic;
+      color: var(--bege);
+    }
+
+    .vcard__spec {
+      font-size: var(--text-sm);
+      color: rgba(226, 201, 154, .8);
+      letter-spacing: .06em;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 6px;
+    }
+
+    .vcard__crefito {
+      font-size: var(--text-xs);
+      color: rgba(255, 255, 255, .4);
+      letter-spacing: .1em;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Bio */
+    .vcard__bio {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border-bottom: 1px solid var(--bege-claro);
+    }
+
+    .vcard__bio p {
+      text-align: center;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    #itens {
+      font-size: 1rem;
+      color: var(--cinza-texto);
+      text-align: center;
+    }
+
+    /* Ações de contato */
+    .vcard__actions {
+      padding: var(--space-lg) var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .vcard__btn {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--bege-claro);
+      background: var(--cinza-claro);
+      transition: all var(--transition-normal);
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--preto-suave);
+      width: 100%;
+    }
+
+    .vcard__btn:hover {
+      background: var(--bege-claro);
+      border-color: var(--bege);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .vcard__btn--primary {
+      background: var(--marrom);
+      border-color: var(--marrom);
+      color: var(--branco);
+    }
+
+    .vcard__btn--primary:hover {
+      background: var(--marrom-medio);
+      border-color: var(--marrom-medio);
+    }
+
+    .vcard__btn-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, .15);
+    }
+
+    .vcard__btn--primary .vcard__btn-icon {
+      background: rgba(255, 255, 255, .15);
+    }
+
+    .vcard__btn:not(.vcard__btn--primary) .vcard__btn-icon {
+      background: var(--bege-claro);
+      color: var(--marrom);
+    }
+
+    .vcard__btn-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .vcard__btn-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .vcard__btn-label {
+      font-size: 15px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      opacity: .55;
+      display: block;
+      margin-bottom: 1px;
+    }
+
+    .vcard__btn--primary .vcard__btn-label {
+      opacity: .7;
+    }
+
+    .vcard__btn-value {
+      font-size: var(--text-sm);
+      font-weight: 500;
+    }
+
+    .vcard__btn-arrow {
+      opacity: .3;
+      font-size: var(--text-lg);
+      line-height: 1;
+    }
+
+    /* Seção compartilhar */
+    .vcard__share {
+      margin: 0 var(--space-xl) var(--space-xl);
+      background: linear-gradient(135deg, var(--bege-claro), var(--bege));
+      border-radius: var(--radius-lg);
+      padding: none;
+      text-align: center;
+      border: 1px solid rgba(226, 201, 154, .4);
+    }
+
+    .vcard__share-title {
+      font-family: var(--font-titulo);
+      font-size: var(--text-lg);
+      font-weight: 400;
+      color: var(--preto-suave);
+      margin: 12px;
+    }
+
+    .vcard__share-btn {
+      background: var(--marrom);
+      color: var(--branco);
+      border: none;
+      border-radius: var(--radius-full);
+      padding: .75rem 1.75rem;
+      font-family: var(--font-texto);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      transition: all var(--transition-normal);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+      gap: 5px;
+    }
+
+    .vcard__share-btn:hover {
+      background: var(--marrom-medio);
+      transform: translateY(-1px);
+    }
+
+    .vcard__share-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+
+    /* Rodapé do card */
+    .vcard__footer {
+      text-align: center;
+      padding: var(--space-md) var(--space-xl) var(--space-xl);
+      border-top: 1px solid var(--bege-claro);
+    }
+
+    .vcard__footer p {
+      font-size: var(--text-xs);
+      color: var(--oliva);
+      letter-spacing: .06em;
+    }
+
+    .vcard__logo {
+      width: 200px; /* Tamanho delicado para o cartão */
+      height: auto;
+      margin: 0 auto 12px auto;
+      display: block;
+    }
