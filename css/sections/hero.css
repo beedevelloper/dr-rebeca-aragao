@@ -19,7 +19,6 @@
   object-fit: cover;
   object-position: 20% 30%;
   opacity: .45;
-  /* Sem foto ainda: fundo escuro */
 }
 
 /* Gradiente sobre a foto */
@@ -230,5 +229,21 @@
   .hero__deco-circle--1,
   .hero__deco-circle--2 {
     display: none;
+  }
+}
+
+/* =========================================
+   AJUSTE DO HERO PARA MONITORES GRANDES (22"+)
+   ========================================= */
+@media (min-width: 1400px) {
+  .hero .container {
+    /* Aumenta a largura máxima do container apenas nesta tela para alinhar com o cabeçalho */
+    max-width: 1400px;
+  }
+
+  .hero__content {
+    /* "Puxa" o bloco de textos e botões para a esquerda. 
+       Se quiser que vá ainda mais para a borda, aumente esse valor negativo (ex: -60px, -80px) */
+    margin-left: -40px; 
   }
 }
