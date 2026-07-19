@@ -19,10 +19,10 @@
   <meta property="og:url" content="https://rebecaaragao.vercel.app/card" />
 
   <!-- IMAGEM DO WHATSAPP: Link absoluto (com https). Substitua pelo nome do arquivo com fundo -->
-  <meta property="og:image" content="/assets/images/01.jpeg"/>
+  <meta property="og:image" content="https://rebecaaragao.vercel.app/assets/images/01.jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://rebecaaragao.vercel.app/assets/images/01.jpeg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -170,14 +170,24 @@
 
   </div>
 
+  <div id="toast-notificacao">Link copiado com sucesso!</div>
+
   <script>
     const shareBtn = document.getElementById('share-btn');
-
-    // SOLUÇÃO: URL fixa para garantir que sempre compartilhe o link limpo
     const cardUrl = 'https://rebecaaragao.vercel.app/card';
 
+    // Função para mostrar o aviso bonito
+    function mostrarToast() {
+      const toast = document.getElementById("toast-notificacao");
+      toast.className = "mostrar";
+      // Esconde o aviso depois de 3 segundos
+      setTimeout(function () {
+        toast.className = toast.className.replace("mostrar", "");
+      }, 3000);
+    }
+
     shareBtn.addEventListener('click', async () => {
-      // Compartilhamento nativo (Android, iPhone e navegadores compatíveis)
+      // 1. Tenta abrir o compartilhamento nativo primeiro
       if (navigator.share) {
         try {
           await navigator.share({
@@ -185,20 +195,19 @@
             text: 'Conheça o cartão de visita virtual da Dra. Rebeca Aragão, especialista em Fisioterapia Bucomaxilofacial.',
             url: cardUrl,
           });
-          return;
+          return; // Se der certo, para por aqui
         } catch (err) {
-          // Usuário cancelou o compartilhamento
-          return;
+          // Se o usuário cancelar, apenas sai silenciosamente
+          if (err.name === 'AbortError') return;
         }
       }
 
-      // Caso o navegador não suporte navigator.share,
-      // copia o link para a área de transferência.
+      // 2. Plano B: Cai aqui se o navegador (ex: Instagram) bloquear o navigator.share
       try {
         await navigator.clipboard.writeText(cardUrl);
-        alert('Link copiado para a área de transferência!');
+        mostrarToast(); // Chama nosso aviso elegante
       } catch (err) {
-        // Fallback para navegadores antigos
+        // Fallback extremo para aparelhos muito antigos
         const textArea = document.createElement('textarea');
         textArea.value = cardUrl;
         textArea.style.position = 'fixed';
@@ -210,11 +219,10 @@
 
         try {
           document.execCommand('copy');
-          alert('Link copiado para a área de transferência!');
+          mostrarToast();
         } catch (e) {
-          alert('Não foi possível copiar o link.');
+          console.error('Não foi possível copiar.');
         }
-
         document.body.removeChild(textArea);
       }
     });

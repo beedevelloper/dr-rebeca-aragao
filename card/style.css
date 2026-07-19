@@ -325,3 +325,30 @@ img.vcard__photo {
   margin: 0 auto 12px auto;
   display: block;
 }
+
+/* ---- Toast Notification (Aviso de Cópia) ---- */
+#toast-notificacao {
+  visibility: hidden;
+  min-width: 260px;
+  background-color: var(--marrom);
+  color: var(--branco);
+  text-align: center;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  font-size: var(--text-sm);
+  font-family: var(--font-texto);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transition: opacity 0.4s, bottom 0.4s;
+}
+
+#toast-notificacao.mostrar {
+  visibility: visible;
+  opacity: 1;
+  bottom: 50px; /* Faz o aviso subir suavemente */
+}
