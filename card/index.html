@@ -176,18 +176,19 @@
     const shareBtn = document.getElementById('share-btn');
     const cardUrl = 'https://rebecaaragao.vercel.app/card';
 
-    // Função para mostrar o aviso bonito
+    // Criamos a mensagem completa (Texto + 2 quebras de linha + Link)
+    const mensagemCompleta = 'Conheça o cartão de visita virtual da Dra. Rebeca Aragão, especialista em Fisioterapia Bucomaxilofacial.\n\n' + cardUrl;
+
     function mostrarToast() {
       const toast = document.getElementById("toast-notificacao");
       toast.className = "mostrar";
-      // Esconde o aviso depois de 3 segundos
       setTimeout(function () {
         toast.className = toast.className.replace("mostrar", "");
       }, 3000);
     }
 
     shareBtn.addEventListener('click', async () => {
-      // 1. Tenta abrir o compartilhamento nativo primeiro
+      // 1. Tenta abrir o compartilhamento nativo
       if (navigator.share) {
         try {
           await navigator.share({
@@ -195,21 +196,20 @@
             text: 'Conheça o cartão de visita virtual da Dra. Rebeca Aragão, especialista em Fisioterapia Bucomaxilofacial.',
             url: cardUrl,
           });
-          return; // Se der certo, para por aqui
+          return;
         } catch (err) {
-          // Se o usuário cancelar, apenas sai silenciosamente
           if (err.name === 'AbortError') return;
         }
       }
 
-      // 2. Plano B: Cai aqui se o navegador (ex: Instagram) bloquear o navigator.share
+      // 2. Plano B (Instagram): Copia a MENSAGEM COMPLETA para a área de transferência
       try {
-        await navigator.clipboard.writeText(cardUrl);
-        mostrarToast(); // Chama nosso aviso elegante
+        await navigator.clipboard.writeText(mensagemCompleta);
+        mostrarToast();
       } catch (err) {
-        // Fallback extremo para aparelhos muito antigos
+        // Fallback para navegadores muito antigos
         const textArea = document.createElement('textarea');
-        textArea.value = cardUrl;
+        textArea.value = mensagemCompleta;
         textArea.style.position = 'fixed';
         textArea.style.opacity = '0';
 
