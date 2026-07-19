@@ -154,7 +154,7 @@
       font-size: 0.9rem;
     }
 
-    #itens {
+    .itens {
       font-size: 1rem;
       color: var(--cinza-texto);
       text-align: center;
