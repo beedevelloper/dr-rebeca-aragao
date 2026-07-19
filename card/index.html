@@ -154,12 +154,12 @@
 
   <script>
     const shareBtn = document.getElementById('share-btn');
-    const feedback = document.getElementById('copy-feedback');
-    // URL deste cartão — substitua pela URL real
-    const cardUrl = 'https://rebecaaragao.vercel.app/card/';
+
+    // Pega automaticamente a URL da página atual
+    const cardUrl = window.location.href;
 
     shareBtn.addEventListener('click', async () => {
-      // Web Share API (nativa do celular)
+      // Compartilhamento nativo (Android, iPhone e navegadores compatíveis)
       if (navigator.share) {
         try {
           await navigator.share({
@@ -167,29 +167,38 @@
             text: 'Conheça o cartão de visita virtual da Dra. Rebeca Aragão, especialista em Fisioterapia Bucomaxilofacial.',
             url: cardUrl,
           });
-        } catch (e) {
-          // Usuário cancelou — silencioso
+          return;
+        } catch (err) {
+          // Usuário cancelou o compartilhamento
+          return;
         }
-        return;
       }
 
-      // Fallback: copiar link
+      // Caso o navegador não suporte navigator.share,
+      // copia o link para a área de transferência.
       try {
         await navigator.clipboard.writeText(cardUrl);
-        feedback.textContent = '✓ Link copiado! Agora é só colar e compartilhar.';
-      } catch {
-        // Fallback para browsers sem clipboard API
-        const ta = document.createElement('textarea');
-        ta.value = cardUrl;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        ta.remove();
-        feedback.textContent = '✓ Link copiado!';
+        alert('Link copiado para a área de transferência!');
+      } catch (err) {
+        // Fallback para navegadores antigos
+        const textArea = document.createElement('textarea');
+        textArea.value = cardUrl;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          document.execCommand('copy');
+          alert('Link copiado para a área de transferência!');
+        } catch (e) {
+          alert('Não foi possível copiar o link.');
+        }
+
+        document.body.removeChild(textArea);
       }
-      setTimeout(() => { feedback.textContent = ''; }, 3500);
     });
   </script>
 
