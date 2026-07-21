@@ -2,12 +2,6 @@
  * ============================================================
  * ARQUIVO DE CONTEÚDO — Dra. Rebeca Aragão
  * ============================================================
- * ATENÇÃO: Devido à estrutura do site, este arquivo altera 
- * APENAS as seções de: Contato, Tratamentos, Especialidades 
- * e Depoimentos. 
- * * Textos da capa (Hero), seção "Quem Sou" e "Cartão de Visita" 
- * devem ser alterados DIRETAMENTE nos arquivos .html
- * ============================================================
  */
 
 const CONTENT = {
